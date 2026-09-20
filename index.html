@@ -57,3 +57,4 @@ if(id==='inside'){try{localStorage.setItem('mulberryMap','1')}catch(e){}}const s
 const mm=document.getElementById('mapmodal');document.getElementById('mapbtn').onclick=()=>mm.classList.add('open');document.getElementById('closemap').onclick=()=>mm.classList.remove('open');mm.onclick=e=>{if(e.target===mm)mm.classList.remove('open')};
 const cont=document.getElementById('continue');if(safeGet())cont.style.display='block';document.getElementById('start').addEventListener('click',function(e){e.preventDefault();safeRemove();show('intro');});cont.addEventListener('click',function(e){e.preventDefault();show(safeGet()||'intro');});document.getElementById('reset').onclick=()=>{if(confirm('最初から読み直しますか？')){safeRemove();show('intro');window.scrollTo(0,0)}};
 </script></body></html>
+
