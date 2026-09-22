@@ -46,7 +46,13 @@ sc('upHall','別荘・二階',`二階の廊下へ戻る。\n\n突き当たりの
 
 一階の部屋を、もう一度調べてみる必要がありそうだ。
 
-`,[['一階を調べる','bathReady']]);sc('bathReady','別荘・一階',`一階へ戻った。\n\n館の中は、不自然なほど静かだった。\n\n残っているのは――浴室。\n\nかすかな『かごめかごめ』が、浴室の方から聞こえる。\n\n女友達が、扉を見たまま言った。\n\n「……開けるの？」\n\n男友達の腕時計が、カチッ、と鳴る。\n女友達のペンダントが、風もないのに揺れた。`,[['浴室の扉を開ける','hall2']]);
+`,[['一階を調べる','reHall']]);const recheckSeen=new Set();function rebuildReHall(){
+
+const r=[['居間','reLiving'],['和室','reWashitsu'],['台所','reKitchen'],['ダイニング','reDining'],['洗面所','reWashroom'],['トイレ','reToilet']];
+
+sc('reHall','別荘・一階','一階の部屋を、もう一度調べてみよう。',[...r.filter(x=>!recheckSeen.has(x[1])),['浴室',recheckSeen.size===6?'bathReady':'bathNoReady']]);
+
+}sc('reLiving','別荘・居間','居間をもう一度見回す。\n\n柱時計は、また止まっている。',[['廊下へ戻る','reHall']]);sc('reWashitsu','別荘・和室','和室をもう一度確認する。\n\n押入れの奥は、静まり返っている。',[['廊下へ戻る','reHall']]);sc('reKitchen','別荘・台所','台所をもう一度見回す。\n\n食器は、何事もなかったように並んでいる。',[['廊下へ戻る','reHall']]);sc('reWashitsu','別荘・和室','和室をもう一度確認する。\n\n押入れの奥は、静まり返っている。',[['廊下へ戻る','reHall']]);sc('reKitchen','別荘・台所','台所をもう一度見回す。\n\n食器は、何事もなかったように並んでいる。',[['廊下へ戻る','reHall']]);sc('bathReady','別荘・一階',`一階へ戻った。\n\n館の中は、不自然なほど静かだった。\n\n残っているのは――浴室。\n\nかすかな『かごめかごめ』が、浴室の方から聞こえる。\n\n女友達が、扉を見たまま言った。\n\n「……開けるの？」\n\n男友達の腕時計が、カチッ、と鳴る。\n女友達のペンダントが、風もないのに揺れた。`,[['浴室の扉を開ける','hall2']]);sc('reDining','別荘・ダイニング','ダイニングをもう一度確認する。\n\nあの椅子だけが、少しずれたままだ。',[['廊下へ戻る','reHall']]);sc('reWashroom','別荘・洗面所','洗面所をもう一度確認する。\n\n鏡には、今度は何も映らない。',[['廊下へ戻る','reHall']]);sc('reToilet','別荘・トイレ','トイレをもう一度確認する。\n\n外からは、もう梟の声も聞こえない。',[['廊下へ戻る','reHall']]);]);
 sc('bath','浴室',`古いタイル張りの浴室。\n\n曇った鏡。錆びた蛇口。\n\nそして――浴槽には、なぜか水が満ちている。\n\n歌が止まった。\n\n黒い水面に、何かが浮かぶ。\n\n古い腕時計。\n\nあなたは男友達を見る。\n\n彼の腕にも――同じ時計がある。\n\n次に、小さなペンダントが水面へ浮かんだ。\n\n女友達の首元にも――同じものがある。\n\nバシャッ。\n\n水面が揺れ、二つは消えた。\n\n振り返る。\n\n男友達と女友達がいない。\n\n四人だったはずなのに。\n\n――二人になっていた。`,[['風呂場から出る','afterBath']]);
 sc('afterBath','別荘・一階',`彼女の手を掴み、浴室を出る。\n\n♪……いついつでやる……\n♪……夜明けの晩に……\n\n二階で、床が一度軋んだ。\n\n浴室の鏡を振り返る。\n\n一瞬だけ――四人が映っていた。\n\n次の瞬間には、二人だけ。\n\n♪……鶴と亀が……\n\n歌が途切れた。`,[['裏勝手へ向かう','backExit'],['玄関へ向かう','frontLocked'],['2階へ向かう','upWrong']]);
 sc('frontLocked','別荘・玄関',`玄関へ走る。\n\nまだ開かない。\n\n背後の暗い廊下から、子供の声が聞こえた気がした。\n\n……今は、ここではない。`,[['裏勝手へ向かう','backExit']]);
@@ -56,13 +62,13 @@ sc('escape','別荘・玄関',`玄関へ走る。\n\n最初は開かなかった
 sc('noLook','別荘・外',`振り返らずに走る。\n\nだが、彼女が立ち止まった。\n\n「……ねえ」\n\nその声に、あなたも足を止める。\n\n見ないままでは終われない気がした。`,[['後ろを振り返る','lookBack']]);
 sc('lookBack','後ろの正面',`ゆっくり、振り返る。\n\n月明かりの下に、古い館が立っている。\n\n開いたままの玄関。\n\nそして――あの二階の窓。\n\n男友達と女友達が、並んで立っていた。\n\n何も言わない。\n手も振らない。\nただ、こちらを見下ろしている。\n\n耳元で、子供の声。\n\n「……だあれ」`,[['――','presentEnd']]);
 sc('presentEnd','現在',`カサッ……。\n\n目を開ける。\n\nいつもの部屋だった。\n\n妻が、古びた新聞を手にしている。\n\n新聞は――まっさらだった。\n\n夢だったのか。記憶だったのか。\nそれとも、もう一度あの夜を歩いたのか。\n\nどこからともなく、二つの声が重なる。\n\n「ありがとう」\n\n窓の外から、子供たちの歌声。\n\n♪……かごめ……かごめ……\n\nあなたは、もう振り返らなかった。`,[['エンディングへ','ending']]);
-sc('ending','ENDING',`製作担当　恋する魔女\n\nプログラム担当　ChatGPT\n\nグラフィック担当　ChatGPT\n\n\n\n―― クワ（マルベリー）の花言葉 ――\n\n\n「ともに死のう」\n\n\n\nThe End`,[['最初から読む','intro']]);
+sc('ending','ENDING',`製作担当　恋する魔女\n\nプログラム担当　ChatGPT\n\nグラフィック担当　ChatGPT\n\n\n\n―― クワ（マルベリー）の花言葉 ――\n\n\n「ともに死のう」\n\n\n\nThe End`,[['最初から読む','intro']]);sc('bathNoReady','別荘・浴室前','浴室の扉に手をかける。\n\nだが――まだ何かを見落としている気がする。',[['一階を調べる','reHall']]);
 const cover=document.getElementById('cover'),reader=document.getElementById('reader'),story=document.getElementById('story'),choices=document.getElementById('choices'),chapter=document.getElementById('chapter');
 function safeGet(){try{return window.localStorage?localStorage.getItem('mulberryScene'):null}catch(e){return null}}
 function safeSet(id){try{if(window.localStorage)localStorage.setItem('mulberryScene',id)}catch(e){}}
 function safeRemove(){try{if(window.localStorage){localStorage.removeItem('mulberryScene');localStorage.removeItem('mulberryMap')}}catch(e){}}
 function mapOwned(){try{return localStorage.getItem('mulberryMap')==='1'}catch(e){return false}}
-function show(id){
+function show(id){if(['reLiving','reWashitsu','reKitchen','reDining','reWashroom','reToilet'].includes(id)){recheckSeen.add(id);}if(id==='reHall'){rebuildReHall();}^_^
 if(id==='inside'){try{localStorage.setItem('mulberryMap','1')}catch(e){}}const s=S[id]||S.intro;safeSet(id);cover.style.display='none';reader.style.display='block';document.getElementById('mapbtn').style.display=(mapOwned() && id!=='ending' && id!=='presentEnd')?'block':'none';chapter.textContent=s.ch||'';reader.classList.remove('fade');void reader.offsetWidth;reader.classList.add('fade');story.textContent=s.text.replaceAll('**','');story.className=id==='ending'?'story ending':'story';choices.innerHTML='';s.choices.forEach(([label,next])=>{const b=document.createElement('button');b.className='choice';b.textContent=label;b.onclick=()=>{show(next);scrollTo({top:0,behavior:'smooth'})};choices.appendChild(b)});}
 const mm=document.getElementById('mapmodal');document.getElementById('mapbtn').onclick=()=>mm.classList.add('open');document.getElementById('closemap').onclick=()=>mm.classList.remove('open');mm.onclick=e=>{if(e.target===mm)mm.classList.remove('open')};
 const cont=document.getElementById('continue');if(safeGet())cont.style.display='block';document.getElementById('start').addEventListener('click',function(e){e.preventDefault();safeRemove();show('intro');});cont.addEventListener('click',function(e){e.preventDefault();show(safeGet()||'intro');});document.getElementById('reset').onclick=()=>{if(confirm('最初から読み直しますか？')){safeRemove();show('intro');window.scrollTo(0,0)}};
