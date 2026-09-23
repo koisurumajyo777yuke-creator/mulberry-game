@@ -1,0 +1,514 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#09090b"><title>The Mystery of the Mulberry</title><style>
+*{box-sizing:border-box}html{background:#09090b}body{margin:0;background:#09090b;color:#eee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;min-height:100vh}.cover{min-height:100svh;background:url('Cover_en.PNG') center/cover no-repeat;display:flex;align-items:flex-end;justify-content:center;padding:0 24px max(8vh,42px)}.cover button,.choice,.utility{border:1px solid #765b85;background:rgba(10,7,13,.9);color:#eee;border-radius:12px;padding:15px 18px;font-size:17px;width:min(540px,100%)}.reader{display:none;max-width:680px;margin:auto;padding:34px 22px 90px;line-height:2;font-size:17px}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:26px}.reader h1{font-size:20px;font-weight:600;margin:0}.utility{width:auto;padding:8px 11px;font-size:12px;color:#bbb}.story{white-space:pre-wrap}.story strong{font-size:1.22em}.choices{display:grid;gap:12px;margin-top:32px}.small{font-size:12px;color:#888;margin-top:30px;text-align:center}.chapter{color:#a98ab9;font-size:13px;letter-spacing:.08em;margin-bottom:18px}.ending{text-align:center;line-height:2.4}.fade{animation:fade .55s}@keyframes fade{from{opacity:0}to{opacity:1}}button{cursor:pointer}.choice:active{transform:translateY(1px)}
+.mapbtn{position:fixed;right:14px;bottom:18px;z-index:20;width:auto;padding:11px 14px;border-radius:999px;background:rgba(10,7,13,.94);box-shadow:0 4px 20px #0008;display:none}.modal{display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.94);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);align-items:center;justify-content:center}.modal.open{display:flex}.modal img{max-width:100%;max-height:100%;object-fit:contain}.closemap{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;width:46px;height:46px;border-radius:50%;border:1px solid #888;background:#111d;color:white;font-size:26px}
+</style></head><body><section id="cover" class="cover"><div style="width:min(540px,100%);display:grid;gap:10px"><button id="start">GAME START</button><button id="continue" style="display:none">CONTINUE</button></div></section><main id="reader" class="reader"><div class="top"><h1>The Mystery of the Mulberry</h1><button class="utility" id="reset">Restart</button></div><div id="chapter" class="chapter"></div><div id="story" class="story"></div><div id="choices" class="choices"></div><div class="small">Your progress is saved on this device.</div></main><button class="utility mapbtn" id="mapbtn">Floor Plan</button><div class="modal" id="mapmodal"><button class="closemap" id="closemap">×</button><img src="madorizu.png.PNG" alt="Villa floor plan"></div><script>
+const S={};
+function sc(id,ch,text,choices){S[id]={ch,text,choices}}
+sc('intro','Present Day',`My wife picked up an old package that had been sitting on top of a shelf.
+
+“What was this again...?”
+
+When she unwrapped it, we found that an old newspaper had been used as wrapping paper. It had been folded many times, and parts of it had yellowed with age.
+
+In one corner of the page was a small article.
+
+— Young couple found dead at mountain villa.
+
+The instant I saw the headline, an uneasiness I could not explain stirred deep inside me.`,[['Read the newspaper article again','reread'],['Ask my wife about it','wife'],['Examine the newspaper closely','inspect']]);
+sc('wife','Present Day',`“Do you remember this newspaper?”
+
+My wife stared at the page for a while.
+
+“...Wasn’t that the newspaper wrapped around one of our wedding gifts?”
+
+As I listened to her, my eyes drifted back to the article.`,[['Read the article again','reread']]);
+sc('inspect','Present Day',`I slowly unfolded the newspaper. Hidden beneath the old creases, the article about the incident came into view.
+
+Why did it feel familiar?
+
+I decided to read it once more.`,[['Read the article','reread']]);
+sc('reread','Present Day',`I looked down at the article again.
+
+The headline was the same.
+
+But—something was different.
+
+The placement of the words. The size of the photograph. Tiny details that felt wrong.
+
+Rustle...
+
+The newspaper moved even though there was no wind.
+
+Then, before my eyes, every printed word, every photograph, even the date began to disappear.
+
+What remained in my hands was an old, yellowed newspaper—completely blank.
+
+“...Thank you.”
+
+The voices of a young man and woman overlapped.
+
+And then—the sound of a train began to draw closer from far away.
+
+That day.
+The time when there were still four of us.`,[['Continue','station']]);
+sc('station','College Days',`The station platform.
+
+An old bench, a timetable, a tiny kiosk.
+
+Beside me was the woman who would one day become my wife, still a college student then.
+
+Two friends came walking toward us from the other side of the platform.
+
+The young man wore an old wristwatch. Around the young woman’s neck hung a small pendant.
+
+All four of us were together.
+
+Outside the station, an old car was waiting.`,[['Ask my friend about the villa','villaTalk'],['Follow them to the car','car']]);
+sc('villaTalk','College Days',`“You’re sure nobody’s staying at that villa, right?”
+
+My friend laughed.
+
+“Probably.”
+
+When I asked where he had heard about the place, his smile vanished for just a moment.
+
+“...I forgot.”
+
+He headed for the station exit first. His old wristwatch caught the platform light for an instant.`,[['Follow them to the car','car']]);
+sc('car','Mountain Road',`The old car carried the four of us away from town and toward the mountains.
+
+In the passenger seat, my friend adjusted his wristwatch.
+“It’s running a little slow.”
+
+In the back seat, the young woman’s pendant swayed gently with the motion of the car.
+
+Before long, the road split in two.`,[['Stop the car and check the map','fork']]);
+sc('fork','Mountain Road',`We stopped the car, and my friend unfolded an old map.
+
+She pointed to the mark of a building at the end of a narrow road.
+
+Then the young woman stared into the dark road to the right and said,
+
+“...That way.”
+
+“Have you been here before?”
+
+“...I just know.”
+
+Knock...
+
+Something struck the roof of the car once.`,[['Take the road she was looking at','road']]);
+sc('road','Mountain Road',`We turned onto the road to the right.
+
+It grew narrower and narrower, branches scraping against the car.
+
+“None of us has been here before, so take it slow.”
+
+Something about my friend’s words bothered me.
+
+—If this was her first time here, how did she know to turn right?
+
+Soon, an old two-story villa appeared in the headlights.
+
+When I stepped out of the car, my eyes were drawn to one of the upstairs windows.
+
+There was nothing there.`,[['Check the front door','front']]);
+sc('front','Villa — Front Entrance',`I tried the front door.
+
+It would not open. It was locked.
+
+My friend looked toward the side of the building.
+“Maybe there’s another way in around back.”
+
+The young woman spoke quietly.
+
+“...There is.”
+
+“What is?”
+
+“...The back...”
+
+She would not say anything more.`,[['Check the front door again','frontAgain'],['Look for the back entrance','back']]);
+sc('frontAgain','Villa — Front Entrance',`I pushed the door again.
+
+It still would not move.
+
+The keyhole was pitch black inside.
+
+Behind me, the young woman was staring toward the side of the building.`,[['Look for the back entrance','back']]);
+sc('back','Villa — Back Entrance',`We followed a narrow path covered in fallen leaves and found an old wooden back door.
+
+My friend turned the handle.
+
+It opened almost too easily.
+
+Cold air flowed out from inside.
+
+Clack.
+
+Something made a sound in the dark hallway.
+
+“...There can’t be anyone in there, right?”`,[['Enter together','inside']]);
+sc('inside','Villa — First Floor',`The moment all four of us stepped inside—
+
+BANG.
+
+The back door slammed shut behind us.
+
+An old floor plan hung on the wall: living room, tatami room, kitchen, dining room, washroom, toilet, bathroom, stairs...
+
+“At least we won’t get lost.”
+
+Then, from somewhere in the villa, we heard a melody like an old music box.
+
+♪...Kagome... Kagome...`,[['Living room','living'],['Tatami room','washitsu'],['Kitchen','kitchen'],['Go upstairs','stairsEarly']]);
+const cleared=new Set();
+const floor1=['living','washitsu','kitchen','dining','washroom','toilet','entryRoom','backRoom'];
+const floor2=['bedroom','guestJ','guestW','storage','corridor2'];
+function markClear(id){cleared.add(id)}
+function allClear(ids){return ids.every(id=>cleared.has(id))}
+function room(id,name,items,correct,event,next='hall'){sc(id,'Villa — '+name,`A dimly lit ${name.toLowerCase()}.
+
+Three things catch your eye.
+
+① ${items[0]}
+② ${items[1]}
+③ ${items[2]}
+
+What will you examine?`,items.map((x,i)=>[x,id+'_'+(i+1)])); for(let i=1;i<=3;i++){sc(id+'_'+i,'Villa — '+name,`You examine ${items[i-1].toLowerCase()}.
+
+Nothing significant happens.
+
+Something else in the room still bothers you.`,items.map((x,j)=>[x,(i===correct[0]&&j+1===correct[1])?id+'_ok':id+'_retry']));} sc(id+'_retry','Villa — '+name,`...Nothing happens.
+
+But as you try to leave the room, your hand stops.
+
+For some reason, it feels wrong to leave things like this.`,[['Search the room again',id]]); sc(id+'_ok','Villa — '+name,event,[['Leave the room',next]]); const ok=S[id+'_ok']; const original=ok.choices; ok.choices=original.map(x=>[x[0],x[1]]); ok.onShow=()=>markClear(id);}
+room('living','Living Room',['Grandfather clock','Photo frame','Drawer'],[1,3],`You close the drawer.
+
+Clunk...
+
+A sound comes from behind you.
+
+You turn around.
+
+The minute hand of the grandfather clock, which had been stopped—
+
+has moved forward by one mark.
+
+The young woman whispers,
+“...It started.”`);
+room('washitsu','Tatami Room',['Low table','Closet','Hanging scroll'],[3,2],`You close the closet.
+
+Knock.
+
+Something taps once from inside.
+
+Nobody speaks.`);
+room('kitchen','Kitchen',['Cupboard','Sink','Refrigerator'],[1,2],`Just as you step away from the sink—
+
+Clink...
+
+A dish nobody touched makes a single sound.`);
+room('dining','Dining Room',['Chair','Table','Old ceiling light'],[2,1],`You glance back.
+
+One chair, which had been tucked under the table, is now pulled slightly backward.`);
+room('washroom','Washroom',['Mirror','Sink','Cabinet'],[3,1],`The instant you look into the mirror—
+
+something like a human figure passes behind you.
+
+You turn around.
+
+No one is there.`);
+room('toilet','Toilet',['Window','Water tank','Shelf'],[2,3],`As you finish checking the shelf,
+
+an owl calls from outside.
+
+Hoo...
+
+Hoo...
+
+Only twice.`);
+room('entryRoom','Front Entrance',['Door','Shoe cabinet','Umbrella stand'],[2,1],`You touch the front door.
+
+Click.
+
+Something moves inside the lock.
+
+But the door still will not open.`);
+room('backRoom','Back Entrance',['Back door','Shelf','Old shoes'],[3,1],`For a moment, the back door handle refuses to move.
+
+When you touch it again, it turns as if nothing happened.`);
+sc('hall','Villa — First Floor',`You return to the hallway.
+
+Somewhere in the villa, old wood creaks.
+
+There are still places you have not checked.`,[['Living room','living'],['Tatami room','washitsu'],['Kitchen','kitchen'],['Dining room','dining'],['Washroom','washroom'],['Toilet','toilet'],['Front entrance','entryRoom'],['Back entrance','backRoom'],['Bathroom','bathCheck'],['Go upstairs','stairs']]);
+sc('stairsEarly','Villa — Second Floor',`You climb the stairs.
+
+...Creak.
+
+The upstairs hallway is completely silent. There is a bedroom, guest rooms, and a storage room. A window stands at the far end.
+
+No matter what you examine, nothing seems to happen.
+
+The young woman looks back toward the stairs and whispers,
+
+“...Not yet.”
+
+From the first floor, you faintly hear “Kagome Kagome.”`,[['Return downstairs','hall'],['Check the bedroom','bedNo']]);
+sc('bedNo','Villa — Second Floor',`You search the bedroom.
+
+For a moment, you think you see something strange reflected in the dressing-table mirror.
+
+But nothing happens.
+
+“Maybe this isn’t the place.”
+
+Your friend says.`,[['Return downstairs','hall']]);
+sc('stairs','Villa — Second Floor',`You climb the stairs.
+
+This time, the air feels different.
+
+Somewhere upstairs—
+
+...Creak.
+
+The floor groans once.`,[['Bedroom','bedroom'],['Japanese-style guest room','guestJ'],['Western-style guest room','guestW'],['Storage room','storage'],['Check the upstairs hallway','corridor2']]);
+room('bedroom','Bedroom',['Bed','Dressing table','Side table'],[2,1],`You look back at the bed.
+
+There is a depression in the blanket that was not there before.
+
+As if—someone had been sitting there only moments ago.`,'upHall');
+room('guestJ','Japanese-style Guest Room',['Low table','Sliding door','Old doll'],[1,3],`You put the doll back where it was.
+
+Slide...
+
+The sliding door behind you opens a few centimeters by itself.`,'upHall');
+room('guestW','Western-style Guest Room',['Desk','Curtain','Lamp'],[3,2],`In front of the closed window, the curtain sways once.
+
+There is no wind.`,'upHall');
+room('storage','Storage Room',['Wooden box','Old newspaper','Photo album'],[1,3],`The final page of the album.
+
+There is a mark where one photograph has been torn away.
+
+Then, from the hallway—
+
+...Creak.
+
+You hear a single footstep.`,'upHall');
+room('corridor2','Upstairs Hallway',['Framed picture','Hallway window','Stairway'],[1,2],`Outside the window, in the darkness of the garden, a figure seems to be standing there.
+
+You blink.
+
+It is gone.`,'upHall');
+sc('upHall','Villa — Second Floor',`You return to the upstairs hallway.
+
+The window at the far end still reflects nothing unusual.
+
+And yet, for some reason, you cannot stop thinking about it.`,[['Bedroom','bedroom'],['Japanese-style guest room','guestJ'],['Western-style guest room','guestW'],['Storage room','storage'],['Upstairs hallway','corridor2'],['Return downstairs','hallAfter2F']]);
+sc('hallAfter2F','Villa — First Floor',`You return from the second floor.
+
+It should be the same hallway as before, but the air feels heavier now.
+
+The bathroom is visible. Still, no one suggests going inside.
+
+—There are still places on this floor left to examine.`,[['Living room','living'],['Tatami room','washitsu'],['Kitchen','kitchen'],['Dining room','dining'],['Washroom','washroom'],['Toilet','toilet'],['Front entrance','entryRoom'],['Back entrance','backRoom'],['Check the bathroom','bathCheck'],['Go back upstairs','stairs']]);
+sc('bathCheck','Outside the Bathroom',`You stop in front of the bathroom.
+
+It is silent beyond the door.
+
+You touch the handle. It is cold.
+
+But—for now, it seems like nothing more than an old bathroom.`,[['Return to the hallway','hallAfter2F']]);
+sc('bathReady','Villa — First Floor',`You return to the first floor.
+
+The villa is unnaturally silent.
+
+Only one place remains—the bathroom.
+
+A faint “Kagome Kagome” drifts from that direction.
+
+The young woman stares at the door.
+
+“...Are you going to open it?”
+
+Your friend’s wristwatch clicks.
+The young woman’s pendant sways even though there is no wind.`,[['Open the bathroom door','bath']]);
+sc('bath','Bathroom',`An old bathroom covered in tile.
+
+A fogged mirror. A rusty faucet.
+
+And—the bathtub is somehow filled with water.
+
+The song stops.
+
+Something floats to the surface of the black water.
+
+An old wristwatch.
+
+You look at your friend.
+
+He is wearing—the same watch.
+
+Then a small pendant rises to the surface.
+
+The young woman is wearing—the same pendant.
+
+SPLASH.
+
+The water ripples, and both objects disappear.
+
+You turn around.
+
+Your two friends are gone.
+
+There should have been four of you.
+
+Now—there are only two.`,[['Leave the bathroom','afterBath']]);
+sc('afterBath','Villa — First Floor',`You grab her hand and leave the bathroom.
+
+♪...When will the bird come out...
+♪...In the night before dawn...
+
+Upstairs, the floor creaks once.
+
+You glance back at the bathroom mirror.
+
+For one instant—it reflects four people.
+
+The next instant, only two.
+
+♪...The crane and turtle slipped...
+
+The song cuts off.`,[['Head for the back entrance','backExit'],['Head for the front entrance','frontLocked'],['Go upstairs','upWrong']]);
+sc('frontLocked','Villa — Front Entrance',`You run to the front door.
+
+It still will not open.
+
+From the dark hallway behind you, you think you hear a child’s voice.
+
+...Not here. Not yet.`,[['Head for the back entrance','backExit']]);
+sc('upWrong','Villa — Stairway',`You put one foot on the stairs.
+
+Two sets of footsteps begin coming closer from above.
+
+...Creak.
+...Creak.
+
+She pulls hard on your arm.
+“Don’t go up there.”`,[['Head for the back entrance','backExit']]);
+sc('backExit','Villa — Back Entrance',`You run to the back entrance.
+
+You turn the handle.
+
+It will not open.
+
+This is the door you came in through.
+
+Then—from the other side of the villa.
+
+...Click.
+
+The front door unlocks.
+
+Upstairs, two sets of footsteps sound again.
+
+...Creak.
+...Creak.`,[['Run to the front entrance','escape']]);
+sc('escape','Villa — Front Entrance',`You run to the front door.
+
+The door that would not open before.
+
+You turn the handle.
+
+—It opens.
+
+The two of you rush outside and run toward the car.
+
+♪...In the night before dawn...
+♪...The crane and turtle slipped...
+♪...Who is behind you—
+
+The song stops there.
+
+You feel eyes on your back.
+
+From that upstairs window.`,[['Look back','lookBack'],['Keep running without looking back','noLook']]);
+sc('noLook','Outside the Villa',`You keep running without looking back.
+
+But she stops.
+
+“...Hey.”
+
+At the sound of her voice, you stop too.
+
+Somehow, it feels as though this cannot end unless you look.`,[['Look back','lookBack']]);
+sc('lookBack','Who Is Behind You?',`Slowly, you turn around.
+
+The old villa stands beneath the moonlight.
+
+The front door is still open.
+
+And then—that upstairs window.
+
+The young man and young woman are standing there side by side.
+
+They say nothing.
+They do not wave.
+They only look down at you.
+
+A child’s voice whispers beside your ear.
+
+“...Who?”`,[['—','presentEnd']]);
+sc('presentEnd','Present Day',`Rustle...
+
+I opened my eyes.
+
+I was back in the same familiar room.
+
+My wife was holding the old newspaper.
+
+It was—completely blank.
+
+Was it a dream? A memory?
+Or had I walked through that night once again?
+
+From somewhere, two voices overlapped.
+
+“Thank you.”
+
+Children were singing outside the window.
+
+♪...Kagome... Kagome...
+
+This time, I did not look back.`,[['Continue to the ending','ending']]);
+sc('ending','ENDING',`製作担当　恋する魔女
+
+プログラム担当　ChatGPT
+
+グラフィック担当　ChatGPT
+
+
+
+— Mulberry flower meaning —
+
+
+“Let us die together.”
+
+
+
+The End`,[['Read from the beginning','intro']]);
+const cover=document.getElementById('cover'),reader=document.getElementById('reader'),story=document.getElementById('story'),choices=document.getElementById('choices'),chapter=document.getElementById('chapter');
+function safeGet(){try{return window.localStorage?localStorage.getItem('mulberrySceneEN'):null}catch(e){return null}}
+function safeSet(id){try{if(window.localStorage)localStorage.setItem('mulberrySceneEN',id)}catch(e){}}
+function safeRemove(){try{if(window.localStorage){localStorage.removeItem('mulberrySceneEN');localStorage.removeItem('mulberryMapEN')}}catch(e){}}
+function mapOwned(){try{return localStorage.getItem('mulberryMapEN')==='1'}catch(e){return false}}
+function show(id){
+if(id.endsWith('_ok')){const base=id.slice(0,-3);markClear(base)}
+if(id==='stairs' && !allClear(floor1)){id='stairsEarly'}
+if(id==='bathCheck' && allClear(floor1) && allClear(floor2)){id='bathReady'}
+if(id==='inside'){try{localStorage.setItem('mulberryMapEN','1')}catch(e){}}const s=S[id]||S.intro;safeSet(id);cover.style.display='none';reader.style.display='block';document.getElementById('mapbtn').style.display=(mapOwned() && id!=='ending' && id!=='presentEnd')?'block':'none';chapter.textContent=s.ch||'';reader.classList.remove('fade');void reader.offsetWidth;reader.classList.add('fade');story.textContent=s.text.replaceAll('**','');story.className=id==='ending'?'story ending':'story';choices.innerHTML='';s.choices.forEach(([label,next])=>{const b=document.createElement('button');b.className='choice';b.textContent=label;b.onclick=()=>{show(next);scrollTo({top:0,behavior:'smooth'})};choices.appendChild(b)});}
+const mm=document.getElementById('mapmodal');document.getElementById('mapbtn').onclick=()=>mm.classList.add('open');document.getElementById('closemap').onclick=()=>mm.classList.remove('open');mm.onclick=e=>{if(e.target===mm)mm.classList.remove('open')};
+const cont=document.getElementById('continue');if(safeGet())cont.style.display='block';document.getElementById('start').addEventListener('click',function(e){e.preventDefault();safeRemove();cleared.clear();show('intro');});cont.addEventListener('click',function(e){e.preventDefault();show(safeGet()||'intro');});document.getElementById('reset').onclick=()=>{if(confirm('Restart from the beginning?')){safeRemove();cleared.clear();show('intro');window.scrollTo(0,0)}};
+</script></body></html>
