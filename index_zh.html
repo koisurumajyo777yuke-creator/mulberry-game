@@ -1,0 +1,532 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#09090b"><title>桑葚怪谈</title><style>
+*{box-sizing:border-box}html{background:#09090b}body{margin:0;background:#09090b;color:#eee;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;min-height:100vh}.cover{min-height:100svh;background:url('Cover_zh.PNG') center/cover no-repeat;display:flex;align-items:flex-end;justify-content:center;padding:0 24px max(8vh,42px)}.cover button,.choice,.utility{border:1px solid #765b85;background:rgba(10,7,13,.9);color:#eee;border-radius:12px;padding:15px 18px;font-size:17px;width:min(540px,100%)}.reader{display:none;max-width:680px;margin:auto;padding:34px 22px 90px;line-height:2;font-size:17px}.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:26px}.reader h1{font-size:20px;font-weight:600;margin:0}.utility{width:auto;padding:8px 11px;font-size:12px;color:#bbb}.story{white-space:pre-wrap}.story strong{font-size:1.22em}.choices{display:grid;gap:12px;margin-top:32px}.small{font-size:12px;color:#888;margin-top:30px;text-align:center}.chapter{color:#a98ab9;font-size:13px;letter-spacing:.08em;margin-bottom:18px}.ending{text-align:center;line-height:2.4}.fade{animation:fade .55s}@keyframes fade{from{opacity:0}to{opacity:1}}button{cursor:pointer}.choice:active{transform:translateY(1px)}
+.mapbtn{position:fixed;right:14px;bottom:18px;z-index:20;width:auto;padding:11px 14px;border-radius:999px;background:rgba(10,7,13,.94);box-shadow:0 4px 20px #0008;display:none}.modal{display:none;position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.94);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom);align-items:center;justify-content:center}.modal.open{display:flex}.modal img{max-width:100%;max-height:100%;object-fit:contain}.closemap{position:absolute;top:max(14px,env(safe-area-inset-top));right:14px;width:46px;height:46px;border-radius:50%;border:1px solid #888;background:#111d;color:white;font-size:26px}
+</style></head><body><section id="cover" class="cover"><div style="width:min(540px,100%);display:grid;gap:10px"><button id="start">开始游戏</button><button id="continue" style="display:none">继续游戏</button></div></section><main id="reader" class="reader"><div class="top"><h1>桑葚怪谈</h1><button class="utility" id="reset">重新开始</button></div><div id="chapter" class="chapter"></div><div id="story" class="story"></div><div id="choices" class="choices"></div><div class="small">游戏进度已保存在此设备上。</div></main><button class="utility mapbtn" id="mapbtn">平面图</button><div class="modal" id="mapmodal"><button class="closemap" id="closemap">×</button><img src="madorizu_zh.PNG" alt="别墅平面图"></div><script>
+const S={};
+function sc(id,ch,text,choices){S[id]={ch,text,choices}}
+sc('intro','现在',`妻子从架子上拿起一个放了很久的旧包裹。
+
+“这是什么来着……？”
+
+她拆开包裹后，我们发现外面包着的是一张旧报纸。报纸已经被反复折叠过很多次，有些地方也因年代久远而泛黄。
+
+报纸的一角，有一篇很小的报道。
+
+——山中别墅发现一对年轻男女死亡。
+
+看到标题的瞬间，一种无法解释的不安从心底涌了上来。`,[["再读一遍报纸上的报道","reread"],["问问妻子","wife"],["仔细查看这张报纸","inspect"]]);
+sc('wife','现在',`“你还记得这张报纸吗？”
+
+妻子盯着报纸看了一会儿。
+
+“……这不是当年包着我们结婚礼物的那张报纸吗？”
+
+听她这么一说，我的目光又回到了那篇报道上。`,[["再读一遍报道","reread"]]);
+sc('inspect','现在',`我慢慢展开报纸。
+
+在那些陈旧的折痕下面，那篇事故报道渐渐露了出来。
+
+为什么会觉得这么熟悉？
+
+我决定再读一遍。`,[["阅读报道","reread"]]);
+sc('reread','现在',`我再次低头看向那篇报道。
+
+标题明明和刚才一样。
+
+可是——总觉得哪里不对。
+
+文字的位置、照片的大小，还有一些细小的地方，都让我感到异样。
+
+沙沙……
+
+明明没有风，报纸却自己动了一下。
+
+紧接着，就在我的眼前，所有印刷的文字、照片，甚至日期都开始一点点消失。
+
+最后留在我手中的，只是一张泛黄的旧报纸——上面一片空白。
+
+“……谢谢。”
+
+一男一女的声音重叠在一起。
+
+随后——远处传来了越来越近的列车声。
+
+那一天。
+
+我们四个人还都在的时候。`,[["继续","station"]]);
+sc('station','大学时代',`车站站台。
+
+旧长椅、时刻表，还有一个小小的售货亭。
+
+站在我身边的，是后来成为我妻子的她。那时，我们都还是大学生。
+
+两位朋友从站台另一头朝我们走来。
+
+男生戴着一块旧手表，女生的脖子上挂着一枚小吊坠。
+
+那时，我们四个人都还在一起。
+
+车站外，一辆老旧的汽车正等着我们。`,[["问朋友那栋别墅的事","villaTalk"],["跟他们一起去车上","car"]]);
+sc('villaTalk','大学时代',`“你确定那栋别墅现在没人住吧？”
+
+朋友笑了。
+
+“大概吧。”
+
+我问他是从哪里听说那地方的。
+
+他的笑容有那么一瞬间消失了。
+
+“……忘了。”
+
+说完，他先朝车站出口走去。
+
+他手腕上的旧手表，在站台灯光下闪了一下。`,[["跟他们一起去车上","car"]]);
+sc('car','山路',`老旧的汽车载着我们四个人离开城镇，驶向山区。
+
+坐在副驾驶的朋友调了调手表。
+
+“好像慢了一点。”
+
+后座上，女生胸前的吊坠随着车身轻轻晃动。
+
+没过多久，前方的道路分成了两条。`,[["停车查看地图","fork"]]);
+sc('fork','山路',`我们把车停下，朋友展开了一张旧地图。
+
+她指着一条狭窄道路尽头的建筑标记。
+
+这时，那个女生望着右侧漆黑的道路，说道：
+
+“……走那边。”
+
+“你以前来过这里？”
+
+“……不知道，就是觉得应该走那边。”
+
+咚……
+
+有什么东西只敲了一下车顶。`,[["走她望着的那条路","road"]]);
+sc('road','山路',`我们驶进了右侧的道路。
+
+道路越来越窄，树枝不停刮过车身。
+
+“我们谁都没来过这里，慢一点开。”
+
+朋友的这句话，让我莫名觉得不对劲。
+
+——如果她也是第一次来，为什么会知道要向右转？
+
+不久，一栋老旧的两层别墅出现在车灯前方。
+
+我下车时，目光不由自主地看向二楼的一扇窗户。
+
+那里什么也没有。`,[["查看正门","front"]]);
+sc('front','别墅 — 正门',`我试着推了推正门。
+
+打不开。门锁着。
+
+朋友看向建筑侧面。
+
+“后面会不会还有别的入口？”
+
+那个女生轻声说道：
+
+“……有。”
+
+“什么？”
+
+“……后面……”
+
+她没有再说下去。`,[["再检查一次正门","frontAgain"],["寻找后门","back"]]);
+sc('frontAgain','别墅 — 正门',`我又推了一次门。
+
+还是纹丝不动。
+
+钥匙孔里面漆黑一片。
+
+身后，那个女生一直望着建筑侧面。`,[["寻找后门","back"]]);
+sc('back','别墅 — 后门',`我们沿着铺满落叶的狭窄小路绕到后面，找到了一扇老旧的木门。
+
+朋友转动门把手。
+
+门竟然轻易得有些不自然地打开了。
+
+一股冰冷的空气从里面涌出来。
+
+咔。
+
+黑暗的走廊里，传来了一声响动。
+
+“……里面不可能有人吧？”`,[["一起进去","inside"]]);
+sc('inside','别墅 — 一楼',`就在我们四个人全部踏进屋内的那一刻——
+
+砰！
+
+身后的后门猛地关上了。
+
+墙上挂着一张旧平面图：客厅、和室、厨房、餐厅、洗手间、厕所、浴室、楼梯……
+
+“至少不会迷路了。”
+
+就在这时，别墅深处传来像旧八音盒一样的旋律。
+
+♪……笼目，笼目……`,[["客厅","living"],["和室","washitsu"],["厨房","kitchen"],["上楼","stairsEarly"]]);
+const cleared=new Set();
+const floor1=['living','washitsu','kitchen','dining','washroom','toilet','entryRoom','backRoom'];
+const floor2=['bedroom','guestJ','guestW','storage','corridor2'];
+function markClear(id){cleared.add(id)}
+function allClear(ids){return ids.every(id=>cleared.has(id))}
+function room(id,name,items,correct,event,next='hall'){sc(id,'别墅 — '+name,`光线昏暗的${name}。
+
+有三样东西引起了你的注意。
+
+① ${items[0]}
+② ${items[1]}
+③ ${items[2]}
+
+要调查什么？`,items.map((x,i)=>[x,id+'_'+(i+1)])); for(let i=1;i<=3;i++){sc(id+'_'+i,'别墅 — '+name,`你调查了${items[i-1]}。
+
+没有发生什么特别的事情。
+
+房间里似乎还有什么让你在意。`,items.map((x,j)=>[x,(i===correct[0]&&j+1===correct[1])?id+'_ok':id+'_retry']));} sc(id+'_retry','别墅 — '+name,`……什么也没有发生。
+
+可就在你准备离开房间时，手却停了下来。
+
+不知为什么，总觉得不能就这样离开。`,[['再调查一次房间',id]]); sc(id+'_ok','别墅 — '+name,event,[['离开房间',next]]); const ok=S[id+'_ok']; const original=ok.choices; ok.choices=original.map(x=>[x[0],x[1]]); ok.onShow=()=>markClear(id);}
+room('living','客厅',["落地钟","相框","抽屉"],[1, 3],`你关上抽屉。
+
+咔嗒……
+
+身后传来一声响。
+
+你回过头。
+
+原本已经停住的落地钟——
+
+分针向前移动了一格。
+
+那个女生低声说道：
+“……开始了。”`);
+room('washitsu','和室',["矮桌","壁橱","挂轴"],[3, 2],`你关上壁橱。
+
+咚。
+
+里面传来一下敲击声。
+
+谁也没有说话。`);
+room('kitchen','厨房',["橱柜","水槽","冰箱"],[1, 2],`就在你离开水槽的时候——
+
+叮……
+
+一只没人碰过的盘子突然响了一声。`);
+room('dining','餐厅',["椅子","餐桌","旧吊灯"],[2, 1],`你回头看了一眼。
+
+原本推进桌下的一把椅子，不知何时向后移开了一点。`);
+room('washroom','洗手间',["镜子","洗手池","柜子"],[3, 1],`就在你看向镜子的瞬间——
+
+一个像人影一样的东西从你身后掠过。
+
+你猛地回头。
+
+那里没有任何人。`);
+room('toilet','厕所',["窗户","水箱","架子"],[2, 3],`就在你检查完架子时，
+
+外面传来了猫头鹰的叫声。
+
+咕——
+
+咕——
+
+只有两声。`);
+room('entryRoom','正门',["门","鞋柜","伞架"],[2, 1],`你碰了碰正门。
+
+咔。
+
+锁的内部似乎有什么东西动了一下。
+
+但门还是打不开。`);
+room('backRoom','后门',["后门","架子","旧鞋"],[3, 1],`有那么一瞬间，后门的把手完全转不动。
+
+你再次触碰时，它却像什么都没发生过一样顺利转动。`);
+sc('hall','别墅 — 一楼',`你回到走廊。
+
+别墅某处传来老木头吱呀作响的声音。
+
+还有一些地方没有调查。`,[["客厅","living"],["和室","washitsu"],["厨房","kitchen"],["餐厅","dining"],["洗手间","washroom"],["厕所","toilet"],["正门","entryRoom"],["后门","backRoom"],["浴室","bathCheck"],["上楼","stairs"]]);
+sc('stairsEarly','别墅 — 二楼',`你走上楼梯。
+
+……吱呀。
+
+二楼走廊安静得可怕。这里有卧室、客房和储物间。走廊尽头还有一扇窗户。
+
+不管调查哪里，都没有发生任何事情。
+
+那个女生回头看向楼梯，低声说道：
+
+“……还没到时候。”
+
+从一楼隐约传来“笼目，笼目……”的歌声。`,[["回到一楼","hall"],["查看卧室","bedNo"]]);
+sc('bedNo','别墅 — 二楼',`你调查了卧室。
+
+有那么一瞬间，你好像在梳妆台的镜子里看到了什么奇怪的东西。
+
+但什么也没有发生。
+
+“可能还不是这里。”
+
+朋友说道。`,[["回到一楼","hall"]]);
+sc('stairs','别墅 — 二楼',`你再次走上楼梯。
+
+这一次，空气明显不一样了。
+
+二楼某处——
+
+……吱呀。
+
+地板只响了一声。`,[["卧室","bedroom"],["和式客房","guestJ"],["西式客房","guestW"],["储物间","storage"],["调查二楼走廊","corridor2"]]);
+room('bedroom','卧室',["床","梳妆台","床头柜"],[2, 1],`你回头看向床。
+
+被子上出现了刚才还没有的凹痕。
+
+就像——直到刚才还有人坐在那里。`,'upHall');
+room('guestJ','和式客房',["矮桌","拉门","旧人偶"],[1, 3],`你把人偶放回原处。
+
+沙啦……
+
+身后的拉门自己打开了几厘米。`,'upHall');
+room('guestW','西式客房',["书桌","窗帘","台灯"],[3, 2],`紧闭的窗户前，窗帘忽然晃了一下。
+
+明明没有风。`,'upHall');
+room('storage','储物间',["木箱","旧报纸","相册"],[1, 3],`相册的最后一页。
+
+那里留下了某张照片被撕走的痕迹。
+
+紧接着，走廊里——
+
+……吱呀。
+
+传来了一声脚步。`,'upHall');
+room('corridor2','二楼走廊',["墙上的画","走廊窗户","楼梯"],[1, 2],`窗外的庭院一片漆黑。
+
+那里似乎站着一个人影。
+
+你眨了一下眼。
+
+人影消失了。`,'upHall');
+sc('upHall','别墅 — 二楼',`你回到二楼走廊。
+
+走廊尽头的窗户里，依旧没有映出什么异常。
+
+可不知道为什么，你始终无法不去在意那扇窗户。`,[["卧室","bedroom"],["和式客房","guestJ"],["西式客房","guestW"],["储物间","storage"],["二楼走廊","corridor2"],["回到一楼","hallAfter2F"]]);
+sc('hallAfter2F','别墅 — 一楼',`你从二楼回到一楼。
+
+明明还是刚才那条走廊，空气却变得更加沉重。
+
+浴室就在眼前。
+
+但谁也没有提议进去。
+
+——这一层还有尚未调查的地方。`,[["客厅","living"],["和室","washitsu"],["厨房","kitchen"],["餐厅","dining"],["洗手间","washroom"],["厕所","toilet"],["正门","entryRoom"],["后门","backRoom"],["查看浴室","bathCheck"],["再上二楼","stairs"]]);
+sc('bathCheck','浴室门外',`你停在浴室门前。
+
+门后没有任何声音。
+
+你摸了摸门把手。冰冷刺骨。
+
+不过——现在看来，这似乎只是一间老旧的浴室。`,[["回到走廊","hallAfter2F"]]);
+sc('bathReady','别墅 — 一楼',`你回到一楼。
+
+别墅里静得不正常。
+
+只剩最后一个地方——浴室。
+
+从那个方向，隐约传来了“笼目，笼目……”的歌声。
+
+那个女生盯着浴室的门。
+
+“……你要打开吗？”
+
+朋友的手表发出咔哒声。
+
+明明没有风，女生胸前的吊坠却轻轻晃动起来。`,[["打开浴室的门","bath"]]);
+sc('bath','浴室',`一间铺着老旧瓷砖的浴室。
+
+起雾的镜子，生锈的水龙头。
+
+还有——浴缸里不知为何已经装满了水。
+
+歌声停了。
+
+黑色的水面上，有什么东西浮了上来。
+
+一块旧手表。
+
+你看向朋友。
+
+他的手腕上——戴着一模一样的手表。
+
+接着，一枚小吊坠也浮出了水面。
+
+那个女生的脖子上——正戴着一模一样的吊坠。
+
+哗啦！
+
+水面荡起波纹，两件东西同时消失了。
+
+你猛地回头。
+
+那两位朋友不见了。
+
+原本应该有四个人。
+
+现在——只剩下两个人。`,[["离开浴室","afterBath"]]);
+sc('afterBath','别墅 — 一楼',`你拉住她的手，离开浴室。
+
+♪……笼中的鸟儿，何时才能出来……
+♪……黎明前的夜里……
+
+二楼的地板吱呀响了一声。
+
+你回头看了一眼浴室里的镜子。
+
+有那么一瞬间——镜子里映出了四个人。
+
+下一瞬间，只剩两个。
+
+♪……鹤与龟滑倒了……
+
+歌声戛然而止。`,[["前往后门","backExit"],["前往正门","frontLocked"],["上楼","upWrong"]]);
+sc('frontLocked','别墅 — 正门',`你跑向正门。
+
+门还是打不开。
+
+身后黑暗的走廊里，你仿佛听见了孩子的声音。
+
+……不是这里。还没到时候。`,[["前往后门","backExit"]]);
+sc('upWrong','别墅 — 楼梯',`你把一只脚踏上楼梯。
+
+二楼传来了两个人的脚步声，而且越来越近。
+
+……吱呀。
+……吱呀。
+
+她猛地拉住你的手臂。
+
+“别上去。”`,[["前往后门","backExit"]]);
+sc('backExit','别墅 — 后门',`你跑到后门。
+
+转动门把手。
+
+打不开。
+
+这明明就是我们进来时走的那扇门。
+
+就在这时——别墅另一侧传来声音。
+
+……咔哒。
+
+正门的锁打开了。
+
+二楼再次响起两个人的脚步声。
+
+……吱呀。
+……吱呀。`,[["跑向正门","escape"]]);
+sc('escape','别墅 — 正门',`你跑向正门。
+
+那扇之前无论如何都打不开的门。
+
+你转动门把手。
+
+——打开了。
+
+你们两个人冲出别墅，朝汽车跑去。
+
+♪……黎明前的夜里……
+♪……鹤与龟滑倒了……
+♪……背后正对着你的是谁——
+
+歌声在这里停住了。
+
+你感觉到背后有视线。
+
+来自二楼的那扇窗户。`,[["回头看","lookBack"],["不要回头，继续跑","noLook"]]);
+sc('noLook','别墅外',`你没有回头，继续往前跑。
+
+可是她停下了脚步。
+
+“……喂。”
+
+听见她的声音，你也停了下来。
+
+不知为什么，你感觉——如果不回头看，这一切就无法结束。`,[["回头看","lookBack"]]);
+sc('lookBack','背后正面的是谁？',`你慢慢回过头。
+
+月光下，那栋老旧的别墅静静伫立着。
+
+正门依然敞开。
+
+然后——二楼的那扇窗户。
+
+那个男生和那个女生，并肩站在那里。
+
+他们什么也不说。
+
+没有挥手。
+
+只是静静地低头看着你。
+
+耳边，响起一个孩子的低语。
+
+“……是谁？”`,[["——","presentEnd"]]);
+sc('presentEnd','现在',`沙沙……
+
+我睁开了眼睛。
+
+又回到了那个熟悉的房间。
+
+妻子手里拿着那张旧报纸。
+
+上面——一片空白。
+
+刚才的是梦？是记忆？
+
+还是我又一次走过了那个夜晚？
+
+不知从哪里，两道声音重叠在一起。
+
+“谢谢。”
+
+窗外传来孩子们的歌声。
+
+♪……笼目，笼目……
+
+这一次，我没有回头。`,[["继续进入结局","ending"]]);
+sc('ending','结局',`製作担当　恋する魔女
+
+プログラム担当　ChatGPT
+
+グラフィック担当　ChatGPT
+
+
+
+—— 桑葚的花语 ——
+
+
+“一起死吧。”
+
+
+
+The End`,[["从头开始","intro"]]);
+const cover=document.getElementById('cover'),reader=document.getElementById('reader'),story=document.getElementById('story'),choices=document.getElementById('choices'),chapter=document.getElementById('chapter');
+function safeGet(){try{return window.localStorage?localStorage.getItem('mulberrySceneZH'):null}catch(e){return null}}
+function safeSet(id){try{if(window.localStorage)localStorage.setItem('mulberrySceneZH',id)}catch(e){}}
+function safeRemove(){try{if(window.localStorage){localStorage.removeItem('mulberrySceneZH');localStorage.removeItem('mulberryMapZH')}}catch(e){}}
+function mapOwned(){try{return localStorage.getItem('mulberryMapZH')==='1'}catch(e){return false}}
+function show(id){
+if(id.endsWith('_ok')){const base=id.slice(0,-3);markClear(base)}
+if(id==='stairs' && !allClear(floor1)){id='stairsEarly'}
+if(id==='bathCheck' && allClear(floor1) && allClear(floor2)){id='bathReady'}
+if(id==='inside'){try{localStorage.setItem('mulberryMapZH','1')}catch(e){}}const s=S[id]||S.intro;safeSet(id);cover.style.display='none';reader.style.display='block';document.getElementById('mapbtn').style.display=(mapOwned() && id!=='ending' && id!=='presentEnd')?'block':'none';chapter.textContent=s.ch||'';reader.classList.remove('fade');void reader.offsetWidth;reader.classList.add('fade');story.textContent=s.text.replaceAll('**','');story.className=id==='ending'?'story ending':'story';choices.innerHTML='';s.choices.forEach(([label,next])=>{const b=document.createElement('button');b.className='choice';b.textContent=label;b.onclick=()=>{show(next);scrollTo({top:0,behavior:'smooth'})};choices.appendChild(b)});}
+const mm=document.getElementById('mapmodal');document.getElementById('mapbtn').onclick=()=>mm.classList.add('open');document.getElementById('closemap').onclick=()=>mm.classList.remove('open');mm.onclick=e=>{if(e.target===mm)mm.classList.remove('open')};
+const cont=document.getElementById('continue');if(safeGet())cont.style.display='block';document.getElementById('start').addEventListener('click',function(e){e.preventDefault();safeRemove();cleared.clear();show('intro');});cont.addEventListener('click',function(e){e.preventDefault();show(safeGet()||'intro');});document.getElementById('reset').onclick=()=>{if(confirm('要从头重新开始吗？')){safeRemove();cleared.clear();show('intro');window.scrollTo(0,0)}};
+</script></body></html>
